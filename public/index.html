@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Sarah Reyes-Franco">
+    <script
+			type='text/javascript'
+			src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'>
+		</script>
+		<script type='text/javascript' src='js/buttons.js'></script>
+		<script src="js/bootstrap.min.js"></script>
+
+    <title>Movie Finder</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/4-col-portfolio.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Movie Finder</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+        
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div id="message"></div>
+            <h1 class="page-header">Welcome to the Movie Finder!</h1>
+            <div class="col-lg-6">
+                
+                <form action="/login" method="post">
+                    <fieldset>
+                        <legend>Log In</legend>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Username:</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" name="username"/><br/><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Password:</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="password" name="password"/><br/><br/>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Log In" class="btn btn-primary"/>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <form id="signupform">
+                    <fieldset>
+                        <legend>Sign Up</legend>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label>Username:</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="text" id="username2"/><br/><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label>Password:</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="password" id="password2"/><br/><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label>Screen Name:</label>
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="text" id="screenname2"/><br/><br/>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary"/>Sign Up</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Movie Finder 2016</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+</body>
+
+</html>
