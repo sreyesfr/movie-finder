@@ -102,6 +102,38 @@ function addToFavorites(movie){
     return false;
 }
 
+function addToWatchList(movie){
+    var myurl = "/addwatchlist";
+    var username = $("#username").attr('data-username');
+    var password = $("#password").attr('data-password');
+    var watchListStr = $("#watchList").attr('data-watchlist');
+    var watchList = watchListStr.split(',');
+
+    watchList.push(movie);
+    $("#watchList").attr('data-watchlist', watchList);
+    $.ajax({
+        url: myurl,
+        contentType: 'application/x-www-form-urlencoded',
+        data: {
+            find: {
+                "username" : username,
+                "password": password
+            },
+            update: {
+                "$set" : {
+                    "watchList" : watchList
+                }
+            }
+        },  
+        type: 'POST',
+        success: function(result) {
+            // Do something with the result
+            writeAlertMessage(result);
+        }
+    });
+    return false;
+}
+
 //Displays Favorites
 function displayFavorites(){
     $('#favoritesArea').empty();
@@ -116,9 +148,24 @@ function displayFavorites(){
     $('#favoritesArea').append('</ul>');
 }
 
+//Displays WatchList
+function displayWatchList(){
+    $('#watchListArea').empty();
+    var watchListStr = $("#watchList").attr('data-watchlist');
+    var watchList = watchListStr.split(',');
+    watchList.shift();
+    var watchListSet = new Set(watchList);
+    $('#watchListArea').append('<ul>');
+    for (let item of watchListSet){
+        $('#watchListArea').append('<li>' + item + '</li>');
+    }
+    $('#watchListArea').append('</ul>');
+}
+
 //Other JQuery methods
 $(document).ready(function(){
     displayFavorites();
+    displayWatchList();
     //Fades out movieArea when you hover over it
     $('#movieArea').on('mouseenter', '.portfolio-item', function(){
         $(this).fadeTo("fast", 0.5);
@@ -130,11 +177,17 @@ $(document).ready(function(){
         $(this).find("p").remove();
         $(this).find("button").remove();
         $(this).append("<p>" + $(this).find('h4').attr('data-description') + "</p>");
-        $(this).append("<button id='favoriteButton' data-movie='" + $(this).find('h4').text() + "' class='btn btn-primary', style='margin-bottom:10px'>Favorite!</button>");
+        $(this).append("<button id='favoriteButton' data-movie='" + $(this).find('h4').text() + "' class='btn btn-primary', style='margin-bottom:10px; margin-right: 10px;'>Favorite!</button>");
         $("#favoriteButton").on('click', function(){
             addToFavorites($(this).attr('data-movie'));
             displayFavorites();
         });
+        $(this).append("<button id='watchlistButton' data-movie='" + $(this).find('h4').text() + "' class='btn btn-secondary', style='margin-bottom:10px'>Add to Watchlist!</button>");
+        $("#watchlistButton").on('click', function(){
+            addToWatchList($(this).attr('data-movie'));
+            displayWatchList();
+        });
+
     });
     //Closes movie area when mouse leaves
     $('#movieArea').on('mouseleave', '.portfolio-item', function(){

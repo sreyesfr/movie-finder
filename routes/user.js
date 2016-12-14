@@ -11,11 +11,10 @@ exports.init = function(app) {
           checkAuthentication,
           doMovies);
   app.post('/login',
-          passport.authenticate('local', {
-                                  failureRedirect: '/index.html',
-                                  successRedirect: 'movies'}));
+          passport.authenticate('local', {failureRedirect: '/index.html', successRedirect: 'movies'}));
   app.get('/logout', doLogout);
   app.post('/addfavorite', doAddFavorite);
+  app.post('/addwatchlist', doAddWatchList);
 }
 
 
@@ -36,13 +35,26 @@ doAddFavorite = function(request,response){
   });
 }
 
+// This route is called when a new watch list movie is added by the user
+doAddWatchList = function(request,response){
+  var filter = request.body.find ? request.body.find : {};
+  if (!request.body.update){
+    response.render('message', {title: "Movie Finder", obj: "No update operation defined"});
+    return;
+  }
+  var update = request.body.update;
+  userModel.update(filter, update, function(status){
+    response.render('message', {title: 'Movie Finder', obj: status});
+  });
+}
+
 // This route is called when the user logs in
 doMovies = function(req, res) {
   // We only should get here if the user has logged in (authenticated) and
   // in this case req.user should be define, but be careful anyway.
   if (req.user && req.user.screenname) {
     // Render the movies profile view
-    res.render('movies', {member: req.user.screenname, username: req.user.username, password: req.user.password, favorites: req.user.favorites});
+    res.render('movies', {member: req.user.screenname, username: req.user.username, password: req.user.password, favorites: req.user.favorites, watchList: req.user.watchList});
   } else {
     // Render an error if, for some reason, req.user.screenname was undefined 
     res.render('error', { 'message': 'Application error...' });

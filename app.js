@@ -3,7 +3,9 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require('path');
+var flash = require('flash');
 var app = express();
+
 
 // Define how to log events
 app.use(morgan('dev'));

@@ -16,6 +16,8 @@ function createUser() {
   var pass = $("#password2").val();
   var favorites = [];
   favorites[0] = "movieName";
+  var watchList = [];
+  watchList[0] = "movieName";
   var screenname = $("#screenname2").val();
   $.ajax({
     url: myurl,
@@ -24,7 +26,8 @@ function createUser() {
       'username' : user,
       'password' : pass,
       'screenname' : screenname,
-      'favorites' : favorites
+      'favorites' : favorites,
+      'watchList' : watchList
     },
     type: 'PUT',
     success: function(result) {
